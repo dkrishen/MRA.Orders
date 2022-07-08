@@ -50,5 +50,25 @@ namespace BookApi.Controllers
 
             return Ok();
         }
+
+        [HttpDelete]
+        [Route("deleteBook")]
+        public IActionResult DeleteBook(string data)
+        {
+            Guid bookId = JsonConvert.DeserializeObject<Guid>(data);
+            _bookRepository.DeleteBook(bookId);
+
+            return Ok();
+        }
+
+        [HttpPut]
+        [Route("updateBook")]
+        public IActionResult UpdateBook(string data)
+        {
+            Book book = JsonConvert.DeserializeObject<Book>(data);
+            _bookRepository.UpdateBook(book);
+
+            return Ok();
+        }
     }
 }

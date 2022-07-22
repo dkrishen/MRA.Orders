@@ -28,9 +28,9 @@ namespace BookApi.Controllers
         [Route("GetAllBooks")]
         public IActionResult GetBooks()
         {
-            var tmp = _bookRepository.GetBooks();
-            var tmp2 = JsonConvert.SerializeObject(tmp);
-            return Ok(tmp2);
+            var books = _bookRepository.GetBooks();
+            var response = JsonConvert.SerializeObject(books);
+            return Ok(response);
         }
 
         [HttpGet]

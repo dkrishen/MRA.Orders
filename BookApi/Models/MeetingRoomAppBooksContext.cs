@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Extensions.Configuration;
 
 namespace BookApi.Models
 {
@@ -11,9 +12,12 @@ namespace BookApi.Models
         {
         }
 
-        public MeetingRoomAppBooksContext(DbContextOptions<MeetingRoomAppBooksContext> options)
+        public IConfiguration Configuration { get; }
+
+        public MeetingRoomAppBooksContext(DbContextOptions<MeetingRoomAppBooksContext> options, IConfiguration configuration)
             : base(options)
         {
+            Configuration = configuration;
         }
 
         public virtual DbSet<Book> Books { get; set; }
@@ -22,7 +26,7 @@ namespace BookApi.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=DESKTOP-6PJL0PD;Database=MeetingRoomAppBooks;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer(Configuration["Data:Database:ConnectionStrings"]);
             }
         }
 

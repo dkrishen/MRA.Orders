@@ -2,18 +2,11 @@ using BookApi.Models;
 using BookApi.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BookApi
 {
@@ -30,7 +23,7 @@ namespace BookApi
         {
             services.AddDbContext<MeetingRoomAppBooksContext>(options =>
                 options.UseSqlServer(
-                    Configuration["Data:MeetingRoomAppBooksDb:ConnectionStrings"]));
+                    Configuration["Data:Database:ConnectionStrings"]));
             services.AddTransient<IBookRepository, BookRepository>();
 
             services.AddCors(options =>
